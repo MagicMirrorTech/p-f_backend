@@ -6,10 +6,22 @@ const tagSchema = new Schema({
         type: String,
         enum: ['TEAM-TAG', 'EVENT-TAG', 'VENUE-TAG']
     },
-    workers: [
-        workerId: {
+    users: [
+        userId: {
             type: Schema.Types.ObjectId,
             ref: "User"
+        },
+    ],
+    venues: [
+        venueId: {
+            type: Schema.Types.ObjectId,
+            ref: "Venue"
+        },
+    ],
+    events: [
+        eventId: {
+            type: Schema.Types.ObjectId,
+            ref: "Event"
         },
     ],
 }, {
