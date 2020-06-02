@@ -5,7 +5,7 @@ const { sendEmail } = require('../config/nodemailer')
 
 exports.signup = (req, res, next) => {
     User.register({...req.body }, req.body.password)
-        .then(user => { res.status(201).json({ user }) })
+        .then(user => { res.status(201).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } }) })
         .catch(err => res.status(500).json({ err }))
 }
 
@@ -38,7 +38,7 @@ exports.login = (req, res, next) => {
         httpOnly: true,
         secure: true
     })
-    res.status(200).json({ user })
+    res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
 }
 exports.logout = (req, res, next) => {
     res.clearCookie('headload')
