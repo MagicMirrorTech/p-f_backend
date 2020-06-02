@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
 const cors = require('cors');
+const passport = require('./config/passport')
 
 mongoose
     .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -25,11 +26,16 @@ app.use(
     })
 );
 
+app.use(passport.initialize())
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger('dev'));
+
+
 
 const index = require('./routes/index');
 const auth = require('./routes/auth')
