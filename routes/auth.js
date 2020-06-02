@@ -8,7 +8,7 @@ router.post('/signup', signup)
 router.post('/createuser', createUser)
 router.post('/login', passport.authenticate('local'), login)
 router.get('/logged', verifyToken, loggedUser)
-router.post('/logout', logout)
+router.get('/logout', logout)
 
 
 
