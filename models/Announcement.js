@@ -7,12 +7,12 @@ const announcementSchema = new Schema({
         type: String,
         enum: ['LOW', 'MEDIUM', 'HIGH']
     },
-    tags: [
+    tags: [{
         tagId: {
             type: Schema.Types.ObjectId,
             ref: "Tag"
         },
-    ],
+    }],
 }, {
     timestamps: true,
     versionKey: false

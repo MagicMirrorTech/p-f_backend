@@ -3,12 +3,12 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID; //Account SID obtenido de www
 const authToken = process.env.AUTH_TOKEN; // Auth Token
 const client = new twilio(accountSid, authToken);
 
-const twiml = new MessagingResponse();
+//const twiml = new MessagingResponse();
 
 
 exports.textMessage = (subject, message, phones) => {
     return client.messages.create({
-        body: subject message,
+        body: message,
         to: numbers, // Número al que se enviará el SMS
         from: process.env.TWILIO_PHONE_NUMBER // Número comprado de Twilio.com
     })

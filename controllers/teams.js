@@ -1,6 +1,6 @@
 const Tag = require('../models/Team')
 
-exports.createTag(req, res, next) {
+exports.createTag = (req, res, next) => {
     Tag.create({...req.body })
         .then(event => res.status(200).json({ event }))
         .catch(err => res.status(500).json({ err }))
@@ -15,7 +15,7 @@ exports.getAllTags = (req, res, next) => {
 }
 
 exports.getTeamTag = (req, res, next) => {
-    Tag.find({ type: { 'TEAM-TAG' } }).populate({ path: 'users.userId' }).populate({ path: 'events.eventId' }).populate({ path: 'venues.venueId' })
+    Tag.find({ type: 'TEAM-TAG' }).populate({ path: 'users.userId' }).populate({ path: 'events.eventId' }).populate({ path: 'venues.venueId' })
         .then(tags => {
             res.status(200).json({ user })
         })
@@ -23,7 +23,7 @@ exports.getTeamTag = (req, res, next) => {
 }
 
 exports.getEventTag = (req, res, next) => {
-    Tag.find({ type: { 'EVENT-TAG' } }).populate({ path: 'users.userId' }).populate({ path: 'events.eventId' }).populate({ path: 'venues.venueId' })
+    Tag.find({ type: 'EVENT-TAG' }).populate({ path: 'users.userId' }).populate({ path: 'events.eventId' }).populate({ path: 'venues.venueId' })
         .then(tags => {
             res.status(200).json({ tags })
         })
@@ -31,7 +31,7 @@ exports.getEventTag = (req, res, next) => {
 }
 
 exports.getVenueTag = (req, res, next) => {
-    Tag.find({ type: { 'VENUE-TAG' } }).populate({ path: 'users.userId' }).populate({ path: 'events.eventId' }).populate({ path: 'venues.venueId' })
+    Tag.find({ type: 'VENUE-TAG' }).populate({ path: 'users.userId' }).populate({ path: 'events.eventId' }).populate({ path: 'venues.venueId' })
         .then(tags => {
             res.status(200).json({ tags })
         })

@@ -22,7 +22,7 @@ exports.getUsersWithoutAdmin = (req, res, next) => {
 }
 
 exports.getUserSuperAdmin = (req, res, next) => {
-    User.find({ role: { 'SUPER-ADMIN' } }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
+    User.find({ role: 'SUPER-ADMIN' }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
         .then(user => {
             res.status(200).json({ user })
         })
@@ -30,7 +30,7 @@ exports.getUserSuperAdmin = (req, res, next) => {
 }
 
 exports.getUserAdmin = (req, res, next) => {
-    User.find({ role: { 'ADMIN' } }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
+    User.find({ role: 'ADMIN' }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
         .then(user => {
             res.status(200).json({ user })
         })
@@ -38,7 +38,7 @@ exports.getUserAdmin = (req, res, next) => {
 }
 
 exports.getUserSiteManager = (req, res, next) => {
-    User.find({ role: { 'SITE-MANAGER' } }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
+    User.find({ role: 'SITE-MANAGER' }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
         .then(user => {
             res.status(200).json({ user })
         })
@@ -46,7 +46,7 @@ exports.getUserSiteManager = (req, res, next) => {
 }
 
 exports.getUserPayrollManager = (req, res, next) => {
-    User.find({ role: { 'PAYROLL-MANAGER' } }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
+    User.find({ role: 'PAYROLL-MANAGER' }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
         .then(user => {
             res.status(200).json({ user })
         })
@@ -54,7 +54,7 @@ exports.getUserPayrollManager = (req, res, next) => {
 }
 
 exports.getUserTeamMate = (req, res, next) => {
-    User.find({ role: { 'TEAM-MATE' } }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
+    User.find({ role: 'TEAM-MATE' }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
         .then(user => {
             res.status(200).json({ user })
         })
@@ -62,7 +62,7 @@ exports.getUserTeamMate = (req, res, next) => {
 }
 
 exports.getUserLogisticManager = (req, res, next) => {
-    User.find({ role: { 'LOGISTIC-MANAGER' } }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
+    User.find({ role: 'LOGISTIC-MANAGER' }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
         .then(user => {
             res.status(200).json({ user })
         })
