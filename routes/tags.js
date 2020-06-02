@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { createTag, getAllTags, getEventTag, getTeamTag, getVenueTag, updateTag, deleteTag } = require('../controllers/tags')
+const { createTag, getAllTags, getEventTag, getTeamTag, getVenueTag, updateTag, deleteTag } = require('../controllers/teams')
 
 router.post('/create', createTag)
 router.get('/all', getAllTags)
