@@ -27,12 +27,14 @@ const userSchema = new Schema({
             ref: "Event"
         },
     }],
-    tags: [
+    teams: [
         tagId: {
             type: Schema.Types.ObjectId,
             ref: "Tag"
         },
     ],
+    hoursScheduled: String,
+    hoursWorked: String,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
 

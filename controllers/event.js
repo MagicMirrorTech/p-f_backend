@@ -6,6 +6,16 @@ exports.createEvent(req, res, next) {
         .catch(err => res.status(500).json({ err }))
 }
 
+exports.createMultiEvents(req, res, next) {
+    const { events } = req.body
+
+    events.map((e, i) => {
+        Event.create({...e })
+            .then(event => res.status(200).json({ event }))
+            .catch(err => res.status(500).json({ err }))
+    })
+}
+
 exports.getAllEvents = (req, res, next) => {
     Event.find().populate('venueId').populate({ path: 'workers.workerId' }).populate({ path: 'tags.tagId' })
         .then(events => res.status(200).json({ events }))

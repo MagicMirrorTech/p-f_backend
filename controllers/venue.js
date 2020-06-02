@@ -1,6 +1,6 @@
 const Venue = require('../models/Venue')
 
-exports.createEvent(req, res, next) {
+exports.createVenue(req, res, next) {
 
     Venue.create({ req.body })
         .then(venue => res.status(200).json({ venue }))

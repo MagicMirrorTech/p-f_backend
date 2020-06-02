@@ -12,9 +12,16 @@ exports.createAnnouncement(req, res, next) => {
         .catch(err => res.status(500).json({ err }))
 }
 
+exports.getOneAnnouncement = (req, res, next) => {
+    const { id } = req.params
+    Announcement.findById(id).populate({ path: 'tags.tagId' })
+        .then(announcement => res.status(200).json({ announcement }))
+        .catch(err => res.status(500).json({ err }))
+}
+
 exports.getAllAnnouncements = (req, res, next) => {
     Announcement.find().populate({ path: 'tags.tagId' })
-        .then(events => res.status(200).json({ events }))
+        .then(announcement => res.status(200).json({ announcement }))
         .catch(err => res.status(500).json({ err }))
 }
 

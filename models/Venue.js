@@ -9,12 +9,15 @@ const venueSchema = new Schema({
     city: String,
     state: String,
     zip: String,
-    tags: [
-        tagId: {
+    tags: [String],
+    workers: [{
+        workerId: {
             type: Schema.Types.ObjectId,
-            ref: "Tag"
+            ref: "User"
         },
-    ],
+        status: String,
+        time: String
+    }],
 }, {
     timestamps: true,
     versionKey: false

@@ -9,9 +9,9 @@ const path = require('path');
 const cors = require('cors');
 
 mongoose
-  .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
-  .catch((err) => console.error('Error connecting to mongo', err));
+    .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
+    .catch((err) => console.error('Error connecting to mongo', err));
 
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
@@ -19,10 +19,10 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 const app = express();
 
 app.use(
-  cors({
-    credentials: true,
-    origin: [process.env.FRONTENDPOINT]
-  })
+    cors({
+        credentials: true,
+        origin: *
+    })
 );
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -32,7 +32,20 @@ app.use(cookieParser());
 app.use(logger('dev'));
 
 const index = require('./routes/index');
+const auth = require('./routes/auth')
+const event = require('./routes/event')
+const announcement = require('./routes/announcement')
+const tags = require('./routes/tags')
+const user = require('./routes/user')
+const venue = require('./routes/venue')
+
 app.use('/', index);
+app.use('/auth', auth);
+app.use('/events', event);
+app.use('/announcements', announcement)
+app.use('/tags', tags)
+app.use('/users', user)
+app.use('/venues', venue)
 
 // Uncomment this line for production
 // app.get('/*', (req, res) => res.sendFile(__dirname + '/public/index.html'));
