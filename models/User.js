@@ -18,7 +18,7 @@ const userSchema = new Schema({
     role: {
         type: String,
         enum: ['SUPER-ADMIN', 'ADMIN', 'SITE-MANAGER', 'PAYROLL-MANAGER', 'TEAM-MATE', 'LOGISTIC-MANAGER'],
-        default: 'WORKER'
+        default: 'ADMIN'
     },
     type: String,
     events: [{
