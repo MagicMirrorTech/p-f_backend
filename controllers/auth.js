@@ -7,7 +7,7 @@ exports.signup = (req, res, next) => {
     User.register({...req.body }, req.body.password)
         .then(user => {
             const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
-            res.status(201).json({ role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img })
+            res.status(201).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
         })
         .catch(err => res.status(500).json({ err }))
 }
@@ -43,8 +43,16 @@ exports.login = (req, res, next) => {
         httpOnly: true,
         secure: true
     })
-    res.status(200).json({ role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img })
+    res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
 }
+
+exports.loggedUser = (req, res, next) => {
+    const { user } = req
+    const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
+
+    res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
+}
+
 exports.logout = (req, res, next) => {
     res.clearCookie('headload')
     res.clearCookie('signature')
