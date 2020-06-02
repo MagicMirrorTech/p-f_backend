@@ -40,7 +40,7 @@ const user = require('./routes/user')
 const venue = require('./routes/venue')
 
 app.use('/', index);
-app.use('/auth', auth);
+app.use('/', auth);
 app.use('/events', event);
 app.use('/announcements', announcement)
 app.use('/tags', tags)
