@@ -52,6 +52,9 @@ app.use('/announcements', announcement)
 app.use('/tags', tags)
 app.use('/users', user)
 app.use('/venues', venue)
+require('./routes/forgotPassword')(app);
+require('./routes/resetPassword')(app);
+require('./routes/updatePasswordViaEmail')(app);
 
 // Uncomment this line for production
 // app.get('/*', (req, res) => res.sendFile(__dirname + '/public/index.html'));
