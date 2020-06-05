@@ -41,7 +41,7 @@ module.exports = (app) => {
                 });
 
                 const mailOptions = {
-                    from: 'info@greenacorn.com',
+                    from: 'info@sendgrid.net',
                     to: `${user.email}`,
                     subject: 'Reset Password',
                     html: `You are receiving this because you (or someone else) have requested the reset of the password for your account. <br/>
