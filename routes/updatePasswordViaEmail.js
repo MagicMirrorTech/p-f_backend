@@ -3,7 +3,7 @@ const User = require('../models/User')
 
 module.exports = app => {
 
-    app.put('/updatepasswordviaemail', (req, res) => {
+    app.put('/auth/updatepassword', (req, res) => {
         console.log(req.body.password)
         User.findOne({
                 resetPasswordToken: req.body.resetPasswordToken,
