@@ -20,7 +20,6 @@ const userSchema = new Schema({
         enum: ['SUPER-ADMIN', 'ADMIN', 'SITE-MANAGER', 'PAYROLL-MANAGER', 'TEAM-MATE', 'LOGISTIC-MANAGER'],
         default: 'ADMIN'
     },
-    type: String,
     events: [{
         eventId: {
             type: Schema.Types.ObjectId,
@@ -28,9 +27,9 @@ const userSchema = new Schema({
         },
     }],
     teams: [{
-        tagId: {
+        teamId: {
             type: Schema.Types.ObjectId,
-            ref: "Tag"
+            ref: "Team"
         },
     }],
     hoursScheduled: String,
