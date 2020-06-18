@@ -14,13 +14,13 @@ exports.createAnnouncement = (req, res, next) => {
 
 exports.getOneAnnouncement = (req, res, next) => {
     const { id } = req.params
-    Announcement.findById(id).populate({ path: 'tags.tagId' })
+    Announcement.findById(id).populate({ path: 'teams.teamId' })
         .then(announcement => res.status(200).json({ announcement }))
         .catch(err => res.status(500).json({ err }))
 }
 
 exports.getAllAnnouncements = (req, res, next) => {
-    Announcement.find().populate({ path: 'tags.tagId' })
+    Announcement.find().populate({ path: 'teams.teamId' })
         .then(announcement => res.status(200).json({ announcement }))
         .catch(err => res.status(500).json({ err }))
 }
