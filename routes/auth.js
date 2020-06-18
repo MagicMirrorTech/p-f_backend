@@ -9,7 +9,7 @@ router.post('/createuser', createUser)
 router.post('/login', passport.authenticate('local'), login)
 router.get('/logged', verifyToken, loggedUser)
 router.get('/logout', logout)
-router.post('/upload', uploadCloud.single('photo'), upload)
+router.post('/upload/:id', uploadCloud.single('photo'), upload)
 router.patch('/update/:id', updateUser)
 
 
