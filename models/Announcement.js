@@ -8,10 +8,10 @@ const announcementSchema = new Schema({
         enum: ['LOW', 'MEDIUM', 'HIGH']
     },
     teams: [{
-        teamId: {
-            type: Schema.Types.ObjectId,
-            ref: "Team"
-        },
+
+        type: Schema.Types.ObjectId,
+        ref: "Team"
+
     }],
 }, {
     timestamps: true,
