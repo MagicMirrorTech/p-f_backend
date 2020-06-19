@@ -6,7 +6,7 @@ exports.createTag = (req, res, next) => {
         .catch(err => res.status(500).json({ err }))
 }
 
-exports.getAllTags = (req, res, next) => {
+exports.getAllTeams = (req, res, next) => {
     Tag.find().populate('venueId').populate({ path: 'users.userId' }).populate({ path: 'events.eventId' })
         .then(events =>
 

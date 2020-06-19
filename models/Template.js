@@ -16,7 +16,6 @@ const templateSchema = new Schema({
         type: String,
         enum: ['WEDDING', 'BIRTHDAY', 'PARTY']
     },
-    tags: [String],
     workers: [{
         workerId: {
             type: Schema.Types.ObjectId,

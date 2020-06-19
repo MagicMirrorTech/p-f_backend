@@ -2,7 +2,7 @@ const Announcement = require('../models/Announcement')
 const { textMessage } = require('../config/twilio')
 
 exports.createAnnouncement = (req, res, next) => {
-    const { message, tags } = req.body
+    const { message, teams } = req.body
     textMessage(message, phones)
         .then(info => {
             Announcement.create({...req.body })
