@@ -14,7 +14,7 @@ exports.getOneUser = (req, res, next) => {
 }
 
 exports.getUsersWithoutAdmin = (req, res, next) => {
-    User.find({ role: { $in: ['SITE-MANAGER', 'PAYROLL-MANAGER', 'TEAM-MATE', 'LOGISTIC-MANAGER'] } }).populate({ path: 'events.eventId' }).populate({ path: 'tags.tagId' })
+    User.find({ role: { $in: ['SITE-MANAGER', 'PAYROLL-MANAGER', 'TEAM-MATE', 'LOGISTIC-MANAGER'] } }).populate({ path: 'events' }).populate({ path: 'tags' })
         .then(users => {
             res.status(200).json({ users })
         })
@@ -66,13 +66,5 @@ exports.getUserLogisticManager = (req, res, next) => {
         .then(user => {
             res.status(200).json({ user })
         })
-        .catch(err => res.status(500).json({ err }))
-}
-
-
-exports.deleteUser = (req, res, next) => {
-    const { id } = req.params
-    User.findByIdAndDelete(id)
-        .then(user => res.status(200).json({ user }))
         .catch(err => res.status(500).json({ err }))
 }

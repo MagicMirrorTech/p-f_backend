@@ -21,16 +21,12 @@ const userSchema = new Schema({
         default: 'ADMIN'
     },
     events: [{
-        eventId: {
-            type: Schema.Types.ObjectId,
-            ref: "Event"
-        },
+        type: Schema.Types.ObjectId,
+        ref: "Event"
     }],
     teams: [{
-        teamId: {
-            type: Schema.Types.ObjectId,
-            ref: "Team"
-        },
+        type: Schema.Types.ObjectId,
+        ref: "Team"
     }],
     hoursScheduled: String,
     hoursWorked: String,

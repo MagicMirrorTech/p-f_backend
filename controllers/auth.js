@@ -13,12 +13,14 @@ exports.signup = (req, res, next) => {
 }
 
 exports.createUser = (req, res, next) => {
-    const { name, email, msg, password } = req.body
+    const { name, email, password } = req.body
     User.register({...req.body }, req.body.password)
         .then(user => {
+            const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
+
             sendEmail(email, name, msg, password)
                 .then(info => {
-                    res.status(200)
+                    res.status(200).json({ msg: 'Email sent', user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
                 })
                 .catch(err => {
 
@@ -69,6 +71,13 @@ exports.updateUser = (req, res, next) => {
 exports.upload = (req, res) => {
     const { id } = req.params
     User.findByIdAndUpdate(id, { img: req.file.url }, { new: true })
+        .then(user => res.status(200).json({ user }))
+        .catch(err => res.status(500).json({ err }))
+}
+
+exports.deleteUser = (req, res, next) => {
+    const { id } = req.params
+    User.findByIdAndDelete(id)
         .then(user => res.status(200).json({ user }))
         .catch(err => res.status(500).json({ err }))
 }
