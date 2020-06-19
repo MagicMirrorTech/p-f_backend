@@ -17,7 +17,7 @@ exports.getOneAnnouncement = (req, res, next) => {
 }
 
 exports.getAllAnnouncements = (req, res, next) => {
-    Announcement.find().populate({ path: 'teams' })
+    Announcement.find().populate({ path: 'teams' }).sort({ createdAt: 'desc' })
         .then(announcement => res.status(200).json({ announcement }))
         .catch(err => res.status(500).json({ err }))
 }
