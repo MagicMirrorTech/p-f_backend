@@ -35,6 +35,6 @@ exports.updateAnnouncement = (req, res, next) => {
 exports.deleteAnnouncement = (req, res, next) => {
     const { id } = req.params
     Announcement.findByIdAndDelete(id)
-        .then(announcement => res.status(200).json({ announcement }))
+        .then(announcement => res.status(200).json({ msg: 'Announcement Delete', announcement }))
         .catch(err => res.status(500).json({ err }))
 }

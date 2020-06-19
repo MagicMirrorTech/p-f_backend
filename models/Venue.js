@@ -15,7 +15,11 @@ const venueSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "User"
         },
-        status: String,
+        status: {
+            type: String,
+            enum: ['PENDING', 'DECLINED', 'CONFIRMED'],
+            default: 'PENDING'
+        },
         time: String
     }],
 }, {

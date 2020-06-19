@@ -3,6 +3,7 @@ const { createTeam, getAllTeams, updateTeam, deleteTeam } = require('../controll
 
 router.post('/create', createTeam)
 router.get('/all', getAllTeams)
+router.get('/detail/:id', updateTeam)
 router.patch('/update/:id', updateTeam)
 router.delete('/delete/:id', deleteTeam)
 
