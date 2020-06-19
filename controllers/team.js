@@ -1,7 +1,7 @@
-const Tag = require('../models/Team')
+const Team = require('../models/Team')
 
 exports.createTeam = (req, res, next) => {
-    Tag.create({...req.body })
+    Team.create({...req.body })
         .then(team => res.status(200).json({ team }))
         .catch(err => res.status(500).json({ err }))
 }
