@@ -1,12 +1,9 @@
 const router = require('express').Router();
-const { createTag, getAllTeams, getEventTag, getTeamTag, getVenueTag, updateTag, deleteTag } = require('../controllers/team')
+const { createTeam, getAllTeams, updateTeam, deleteTeam } = require('../controllers/team')
 
-router.post('/create', createTag)
+router.post('/create', createTeam)
 router.get('/all', getAllTeams)
-router.get('/event', getEventTag)
-router.get('/team', getTeamTag)
-router.get('/venue', getVenueTag)
-router.patch('/update/:id', updateTag)
-router.delete('/delete/:id', deleteTag)
+router.patch('/update/:id', updateTeam)
+router.delete('/delete/:id', deleteTeam)
 
 module.exports = router;
