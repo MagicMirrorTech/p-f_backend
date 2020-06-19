@@ -18,7 +18,7 @@ exports.createUser = (req, res, next) => {
         .then(user => {
             const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
 
-            sendEmail(email, name, msg, password)
+            sendEmail(email, name, password)
                 .then(info => {
                     res.status(200).json({ msg: 'Email sent', user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
                 })
@@ -26,7 +26,6 @@ exports.createUser = (req, res, next) => {
 
                     res.send(err)
                 })
-            res.status(201).json({ user })
         })
         .catch(err => res.status(500).json({ err }))
 }
