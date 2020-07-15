@@ -21,7 +21,7 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: [process.env.FRONTENDPOINT, 'https://plain-fancy-develop.netlify.app']
+    origin: [process.env.FRONTENDPOINT]
   })
 );
 
