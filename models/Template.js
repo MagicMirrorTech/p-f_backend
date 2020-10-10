@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const eventSchema = new Schema({
+const templateSchema = new Schema({
     name: String,
     date: Date,
     contact: String,
@@ -16,19 +16,17 @@ const eventSchema = new Schema({
         type: String,
         enum: ['WEDDING', 'BIRTHDAY', 'PARTY']
     },
-    tags: [String],
     workers: [{
         workerId: {
             type: Schema.Types.ObjectId,
             ref: "User"
         },
         status: String,
-        time: String,
-        teamName: String
-    }]
+        time: String
+    }],
 }, {
     timestamps: true,
     versionKey: false
 });
 
-module.exports = model('Event', eventSchema);
+module.exports = model('Template', templateSchema);

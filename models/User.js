@@ -18,21 +18,18 @@ const userSchema = new Schema({
     role: {
         type: String,
         enum: ['SUPER-ADMIN', 'ADMIN', 'SITE-MANAGER', 'PAYROLL-MANAGER', 'TEAM-MATE', 'LOGISTIC-MANAGER'],
-        default: 'WORKER'
+        default: 'ADMIN'
     },
-    type: String,
     events: [{
-        eventId: {
-            type: Schema.Types.ObjectId,
-            ref: "Event"
-        },
+        type: Schema.Types.ObjectId,
+        ref: "Event"
     }],
-    tags: [
-        tagId: {
-            type: Schema.Types.ObjectId,
-            ref: "Tag"
-        },
-    ],
+    teams: [{
+        type: Schema.Types.ObjectId,
+        ref: "Team"
+    }],
+    hoursScheduled: String,
+    hoursWorked: String,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
 
