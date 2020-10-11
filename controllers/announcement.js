@@ -1,12 +1,11 @@
 const Announcement = require('../models/Announcement')
-const { textMessage } = require('../config/twilio')
+//const { textMessage } = require('../config/twilio')
 
 exports.createAnnouncement = (req, res, next) => {
     const { message, teams } = req.body
     Announcement.create({...req.body })
         .then(announcement => res.status(200).json({ announcement }))
         .catch(err => res.status(500).json({ err }))
-
 }
 
 exports.getOneAnnouncement = (req, res, next) => {
