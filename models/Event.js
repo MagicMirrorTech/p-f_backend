@@ -8,7 +8,7 @@ const eventSchema = new Schema({
     mobile: Number,
     timeStart: Date,
     timeEnd: Date,
-    VenueId: {
+    venueId: {
         type: Schema.Types.ObjectId,
         ref: "Venue"
     },
