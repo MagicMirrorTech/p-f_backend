@@ -28,15 +28,12 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Team"
     }],
-<<<<<<< HEAD
     teams: [{
         tagId: {
             type: Schema.Types.ObjectId,
             ref: "Tag"
         },
     }],
-=======
->>>>>>> ec3f491a900d106c68d104a8d658b99fb28fafa5
     hoursScheduled: String,
     hoursWorked: String,
     resetPasswordToken: String,
