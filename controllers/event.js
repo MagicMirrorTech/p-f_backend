@@ -1,12 +1,12 @@
 const Event = require('../models/Event')
 
-exports.createEvent(req, res, next) {
+exports.createEvent = (req, res, next) => {
     Event.create({...req.body })
         .then(event => res.status(200).json({ event }))
         .catch(err => res.status(500).json({ err }))
 }
 
-exports.createMultiEvents(req, res, next) {
+exports.createMultiEvents = (req, res, next) => {
     const { events } = req.body
 
     events.map((e, i) => {
