@@ -12,22 +12,28 @@ exports.signup = (req, res, next) => {
         .catch(err => res.status(500).json({ err }))
 }
 
-exports.createUser = (req, res, next) => {
+exports.createUser = async(req, res, next) => {
     const { name, email, password } = req.body
-    User.create({...req.body })
-        .then(user => {
-            const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
+    const user = await User.findOne({ email })
 
-            sendEmail(email, name, password)
-                .then(info => {
-                    res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
-                })
-                .catch(err => {
+    if (user === null) {
+        User.create({...req.body })
+            .then(user => {
+                const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
 
-                    res.send(err)
-                })
-        })
-        .catch(err => res.status(500).json({ err }))
+                sendEmail(email, name, password)
+                    .then(info => {
+                        res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
+                    })
+                    .catch(err => {
+
+                        res.send(err)
+                    })
+            })
+            .catch(err => res.status(500).json({ err }))
+    } else if (user) {
+        res.status(500).json({ message: 'A teammate with the given email is already registered' })
+    }
 }
 
 
