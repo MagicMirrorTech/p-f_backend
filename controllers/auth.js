@@ -14,13 +14,13 @@ exports.signup = (req, res, next) => {
 
 exports.createUser = (req, res, next) => {
     const { name, email, password } = req.body
-    User.register({...req.body }, req.body.password)
+    User.create({...req.body })
         .then(user => {
             const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
 
             sendEmail(email, name, password)
                 .then(info => {
-                    res.status(200).json({ msg: 'Email sent', user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
+                    res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
                 })
                 .catch(err => {
 
@@ -38,11 +38,12 @@ exports.login = (req, res, next) => {
     const [header, payload, signature] = createToken(user)
     res.cookie('headload', `${header}.${payload}.`, {
         maxAge: 1000 * 60 * 30,
-        secure: true
+        httpOnly: true,
+        sameSite: true
     })
     res.cookie('signature', signature, {
         httpOnly: true,
-        secure: true
+        sameSite: true
     })
     res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
 }
