@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { signup, login, loggedUser, logout, createUser, updateUser, upload, deleteUser } = require('../controllers/auth')
+const { signup, login, loggedUser, logout, createUser, updateUser, upload, deleteUser, userDetail } = require('../controllers/auth')
 const passport = require('../config/passport')
 const { verifyToken } = require('../config/jwt')
 const uploadCloud = require('../config/cloudinary')
