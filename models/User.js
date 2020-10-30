@@ -22,17 +22,12 @@ const userSchema = new Schema({
     },
     type: String,
     events: [{
-        eventId: {
-            type: Schema.Types.ObjectId,
-            ref: "Event"
-        },
+        type: Schema.Types.ObjectId,
+        ref: "Event"
     }],
-    tags: [
-        tagId: {
-            type: Schema.Types.ObjectId,
-            ref: "Tag"
-        },
-    ],
+    hoursScheduled: String,
+    hoursWorked: String,
+    tags: [String],
     resetPasswordToken: String,
     resetPasswordExpires: Date,
 

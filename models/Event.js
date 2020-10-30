@@ -6,30 +6,17 @@ const eventSchema = new Schema({
     contact: String,
     phone: Number,
     mobile: Number,
-    timeStart: Date,
-    timeEnd: Date,
-    VenueId: {
+    timeStart: String,
+    timeEnd: String,
+    venueId: {
         type: Schema.Types.ObjectId,
         ref: "Venue"
     },
     type: {
         type: String,
-        enum: ['WEDDING', 'BIRTHDAY', 'PARTY']
+        enum: ['WEDDING', 'BIRTHDAY', 'PARTY', 'OTHER']
     },
-    tags: [
-        tagId: {
-            type: Schema.Types.ObjectId,
-            ref: "Tag"
-        },
-    ],
-    workers: [{
-        workerId: {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        },
-        status: String,
-        time: String
-    }],
+    tags: [String]
 }, {
     timestamps: true,
     versionKey: false
