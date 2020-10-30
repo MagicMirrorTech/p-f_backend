@@ -10,5 +10,6 @@ router.get('/logistic-managers', getUserLogisticManager)
 router.get('/payroll-managers', getUserPayrollManager)
 router.get('/site-managers', getUserSiteManager)
 router.get('/team-mates', getUserTeamMate)
+router.patch('/update/:id', updateUser)
 
 module.exports = router;

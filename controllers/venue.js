@@ -1,14 +1,20 @@
 const Venue = require('../models/Venue')
 
-exports.createEvent(req, res, next) {
-
-    Venue.create({ req.body })
+exports.createVenue = (req, res, next) => {
+    Venue.create({...req.body })
         .then(venue => res.status(200).json({ venue }))
         .catch(err => res.status(500).json({ err }))
 }
 
 exports.getAllVenues = (req, res, next) => {
-    Venue.find().populate({ path: 'tags.tagId' })
+    Venue.find().populate({ path: 'workers.workerId' })
+        .then(venues => res.status(200).json({ venues }))
+        .catch(err => res.status(500).json({ err }))
+}
+
+exports.getOneVenue = (req, res, next) => {
+    const { id } = req.params
+    Venue.findById(id).populate({ path: 'workers.workerId' })
         .then(venue => res.status(200).json({ venue }))
         .catch(err => res.status(500).json({ err }))
 }
