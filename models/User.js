@@ -21,10 +21,6 @@ const userSchema = new Schema({
         default: 'ADMIN'
     },
     type: String,
-    events: [{
-        type: Schema.Types.ObjectId,
-        ref: "Event"
-    }],
     hoursScheduled: String,
     hoursWorked: String,
     tags: [String],
