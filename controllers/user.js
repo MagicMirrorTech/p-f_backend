@@ -71,7 +71,6 @@ exports.getUserLogisticManager = (req, res, next) => {
 
 exports.updateUser = (req, res, next) => {
     const { id } = req.params
-    console.log(">>>> ", req.body)
     User.findByIdAndUpdate(id, {...req.body }, { new: true })
         .then(user => res.status(200).json({ user }))
         .catch(err => res.status(500).json({ err }))
