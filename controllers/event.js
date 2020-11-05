@@ -42,3 +42,15 @@ exports.deleteEvent = (req, res, next) => {
         .then(event => res.status(200).json({ event }))
         .catch(err => res.status(500).json({ err }))
 }
+
+exports.getTags = (req, res, next) => {
+    let tags = [];
+    Event.find()
+        .then(events => {
+            events.forEach(event => {
+                tags = tags.concat(event.tags)
+            })
+            res.status(200).json({ tags })
+        })
+        .catch(err => res.status(500).json({ err }))
+}

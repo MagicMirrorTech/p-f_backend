@@ -32,3 +32,15 @@ exports.deleteVenue = (req, res, next) => {
         .then(venue => res.status(200).json({ venue }))
         .catch(err => res.status(500).json({ err }))
 }
+
+exports.getTags = (req, res, next) => {
+    let tags = [];
+    Venue.find()
+        .then(venues => {
+            venues.forEach(venue => {
+                tags = tags.concat(venue.tags)
+            })
+            res.status(200).json({ tags })
+        })
+        .catch(err => res.status(500).json({ err }))
+}
