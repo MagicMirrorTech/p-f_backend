@@ -50,6 +50,7 @@ exports.getTags = (req, res, next) => {
             events.forEach(event => {
                 tags = tags.concat(event.tags)
             })
+            tags = [...new Set(tags)]
             res.status(200).json({ tags })
         })
         .catch(err => res.status(500).json({ err }))

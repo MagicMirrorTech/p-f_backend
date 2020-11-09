@@ -40,6 +40,7 @@ exports.getTags = (req, res, next) => {
             venues.forEach(venue => {
                 tags = tags.concat(venue.tags)
             })
+            tags = [...new Set(tags)]
             res.status(200).json({ tags })
         })
         .catch(err => res.status(500).json({ err }))

@@ -83,7 +83,8 @@ exports.getTags = (req, res, next) => {
             users.forEach(user => {
                 tags = tags.concat(user.tags)
             })
-            res.status(200).json({ tags })
+            tags = [...new Set(tags)]
+            res.status(200).json({ tags})
         })
         .catch(err => res.status(500).json({ err }))
 }
