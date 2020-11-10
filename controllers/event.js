@@ -1,9 +1,31 @@
 const Event = require('../models/Event')
+const User = require('../models/User')
+const EventUser = require('../models/Event_User')
 
 exports.createEvent = (req, res, next) => {
     Event.create({...req.body })
-        .then(event => res.status(200).json({ event }))
-        .catch(err => res.status(500).json({ err }))
+        .then(event => {
+            let workers = req.body.workers
+            workers.forEach(worker =>{
+                User.findById(worker).then(user =>{
+                    EventUser.create({
+                        eventId: event._id,
+                        workerId: user._id,
+                    })
+                }).catch(exception=>{
+                    User.find({tags: worker}).then(users =>{
+                        users.forEach(user => {
+                            EventUser.create({
+                                eventId: event._id,
+                                workerId: user._id,
+                            })
+                        })
+                    })
+                })
+            })
+        res.status(200).json({ event })
+    }).catch(err => res.status(500).json({ err }))
+
 }
 
 exports.createMultiEvents = (req, res, next) => {
@@ -24,15 +46,47 @@ exports.getAllEvents = (req, res, next) => {
 
 exports.getOneEvent = (req, res, next) => {
     const { id } = req.params
-    Event.findById(id).populate('venueId').populate({ path: 'workers.workerId' })
-        .then(event => res.status(200).json({ event }))
+    Event.findById(id).populate('venueId').lean()
+        .then(async event => {
+            event["users"] = []
+            let users = await EventUser.find({'eventId': id }).
+                populate("workerId")
+            users.forEach(user => {
+                event["users"].push(user.workerId)
+                event["venue"] = event.venueId
+                event["venueId"] = event.venueId._id
+            })
+            res.status(200).json({ event })
+        })
         .catch(err => res.status(500).json({ err }))
 }
 
-exports.updateEvent = (req, res, next) => {
+exports.updateEvent = async (req, res, next) => {
     const { id } = req.params
+    await EventUser.deleteMany({'eventId': id })
+
     Event.findByIdAndUpdate(id, {...req.body }, { new: true })
-        .then(event => res.status(200).json({ event }))
+        .then(event => {
+            let workers = req.body.workers
+            workers.forEach(worker =>{
+                User.findById(worker).then(user =>{
+                    EventUser.create({
+                        eventId: event._id,
+                        workerId: user._id,
+                    })
+                }).catch(exception => {
+                    User.find({tags: worker}).then(users =>{
+                        users.forEach(user => {
+                            EventUser.create({
+                                eventId: event._id,
+                                workerId: user._id,
+                            })
+                        })
+                    })
+                })
+            })
+            res.status(200).json({ event })
+        })
         .catch(err => res.status(500).json({ err }))
 }
 

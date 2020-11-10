@@ -9,9 +9,11 @@ const eventUserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    status: String,
-    time: String,
-    teamName: String
+    time: [{
+        hours: Number,
+        date: Date
+    }],
+    status: String
 }, {
     timestamps: true,
     versionKey: false
