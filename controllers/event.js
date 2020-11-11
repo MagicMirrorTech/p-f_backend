@@ -23,8 +23,9 @@ exports.createEvent = (req, res, next) => {
                     })
                 })
             })
-        res.status(200).json({ event })
-    }).catch(err => res.status(500).json({ err }))
+            res.status(200).json({ event })
+        })
+        .catch(err => res.status(500).json({ err }))
 
 }
 
