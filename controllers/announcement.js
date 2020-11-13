@@ -34,3 +34,16 @@ exports.deleteAnnouncement = (req, res, next) => {
         .then(announcement => res.status(200).json({ msg: 'Announcement Delete', announcement }))
         .catch(err => res.status(500).json({ err }))
 }
+
+exports.getTags = (req, res, next) => {
+    let tags = [];
+    Announcement.find()
+        .then(announcements => {
+            announcements.forEach(announcement => {
+                tags = tags.concat(announcement.tags)
+            })
+            tags = [...new Set(tags)]
+            res.status(200).json({ tags })
+        })
+        .catch(err => res.status(500).json({ err }))
+}

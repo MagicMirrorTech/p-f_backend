@@ -7,12 +7,7 @@ const announcementSchema = new Schema({
         type: String,
         enum: ['LOW', 'MEDIUM', 'HIGH']
     },
-    teams: [{
-
-        type: Schema.Types.ObjectId,
-        ref: "Team"
-
-    }],
+    tags: [String]
 }, {
     timestamps: true,
     versionKey: false

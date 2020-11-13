@@ -56,9 +56,9 @@ exports.login = (req, res, next) => {
 
 exports.loggedUser = (req, res, next) => {
     const { user } = req
-    const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
+    const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img, tags } = user
 
-    res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
+    res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img, tags } })
 }
 
 exports.logout = (req, res, next) => {

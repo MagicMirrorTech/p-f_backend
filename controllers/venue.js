@@ -48,8 +48,11 @@ exports.getOneVenue = (req, res, next) => {
         .catch(err => res.status(500).json({ err }))
 }
 
-exports.updateVenue = (req, res, next) => {
+exports.updateVenue = async (req, res, next) => {
     const { id } = req.params
+    console.log(id)
+    await VenueUser.deleteMany({'venueId': id })
+
     Venue.findByIdAndUpdate(id, {...req.body }, { new: true })
         .then(venue => {
             let workers = req.body.workers

@@ -17,7 +17,7 @@ const userSchema = new Schema({
     pin: String,
     role: {
         type: String,
-        enum: ['SUPER-ADMIN', 'ADMIN', 'SITE-MANAGER', 'PAYROLL-MANAGER', 'TEAM-MATE', 'LOGISTIC-MANAGER'],
+        enum: ['SUPER-ADMIN', 'ADMIN', 'SITE-MANAGER', 'PAYROLL-MANAGER', 'TEAM-MATE', 'LOGISTICS-MANAGER'],
         default: 'ADMIN'
     },
     type: String,
