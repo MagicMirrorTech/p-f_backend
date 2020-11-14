@@ -8,12 +8,12 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-exports.sendEmail = (email, name, msg, password) => {
+exports.sendEmail = (email, name, password, pinCode) => {
     return transporter.sendMail({
         from: '"Plain And Fancy Caterers" <contact@gsendgrid.net>',
         to: email,
         subject: 'Welcome to Plain And Fancy',
-        html: `<h1>Hello ${name}</h1>
+        html: `<h1>Hello ${name} here is password ${password} and you pinCode is ${pinCode}</h1>
       <p>
       Test
       </p>

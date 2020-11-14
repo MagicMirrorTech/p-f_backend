@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const { createToken, createTokenU } = require('../config/jwt')
 const { sendEmail } = require('../config/nodemailer')
-
+const nodePin = require('node-pin');
 
 exports.signup = (req, res, next) => {
     User.register({...req.body }, req.body.password)
@@ -17,11 +17,12 @@ exports.createUser = async(req, res, next) => {
     const user = await User.findOne({ email })
 
     if (user === null) {
-        User.create({...req.body })
+        let user = {...req.body}
+        user.pin = nodePin.generateRandPin(4);
+        User.create(user)
             .then(user => {
                 const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
-
-                sendEmail(email, name, password)
+                sendEmail(email, name, password, pin)
                     .then(info => {
                         res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
                     })

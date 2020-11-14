@@ -23,6 +23,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "multer-storage-cloudinary": "^2.2.1",
+    "node-pin": "^0.1.5",
     "node-sass-middleware": "^0.11.0",
     "nodemailer": "^6.4.6",
     "passport": "^0.4.1",
