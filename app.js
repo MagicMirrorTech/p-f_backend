@@ -41,6 +41,7 @@ const event = require('./routes/event')
 const announcement = require('./routes/announcement')
 const user = require('./routes/user')
 const venue = require('./routes/venue')
+const times = require('./routes/times')
 
 app.use('/', index);
 app.use('/auth', auth);
@@ -48,6 +49,7 @@ app.use('/events', event);
 app.use('/announcements', announcement)
 app.use('/users', user)
 app.use('/venues', venue)
+app.use('/times', times)
 require('./routes/forgotPassword')(app);
 require('./routes/resetPassword')(app);
 require('./routes/updatePasswordViaEmail')(app);
