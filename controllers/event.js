@@ -29,13 +29,15 @@ exports.createEvent = (req, res, next) => {
 }
 
 exports.createCopyEvent = (req, res, next) => {
+    console.log(req.body)
     const {id, name} = req.body
     Event.findById(id).populate().then(async eventCopy => {
         let workers = await EventUser.find({'eventId': id }).populate("workerId")
-        delete eventCopy._id
-        eventCopy.name = name
-        Event.create(eventCopy)
+        Event.create({name, tags: eventCopy.tags, contact: eventCopy.contact, phone: eventCopy.phone,
+            mobile: eventCopy.mobile, timeStart: eventCopy.timeStart, timeEnd: eventCopy.timeEnd,
+            venueId: eventCopy.venueId, type: eventCopy.type, date: eventCopy.date})
             .then(async event => {
+                console.log(event);
                 workers.forEach(worker =>{
                     User.findById(worker).then(user =>{
                         EventUser.create({
