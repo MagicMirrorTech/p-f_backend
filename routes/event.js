@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const { createEvent, getOneEvent, createMultiEvents,
+const { createCopyEvent, createEvent, getOneEvent, createMultiEvents,
     getAllEvents, updateEvent, deleteEvent, getTags } = require('../controllers/event')
 
+router.post('/createCopy', createCopyEvent)
 router.post('/create', createEvent)
 router.post('/createmultievents', createMultiEvents)
 router.get('/all', getAllEvents)

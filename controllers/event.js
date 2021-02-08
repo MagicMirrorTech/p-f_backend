@@ -26,7 +26,37 @@ exports.createEvent = (req, res, next) => {
             res.status(200).json({ event })
         })
         .catch(err => res.status(500).json({ err }))
+}
 
+exports.createCopyEvent = (req, res, next) => {
+    const {id, name} = req.body
+    Event.findById(id).populate().then(async eventCopy => {
+        let workers = await EventUser.find({'eventId': id }).populate("workerId")
+        delete eventCopy._id
+        eventCopy.name = name
+        Event.create(eventCopy)
+            .then(async event => {
+                workers.forEach(worker =>{
+                    User.findById(worker).then(user =>{
+                        EventUser.create({
+                            eventId: event._id,
+                            workerId: user._id,
+                        })
+                    }).catch(exception=>{
+                        User.find({tags: worker}).then(users =>{
+                            users.forEach(user => {
+                                EventUser.create({
+                                    eventId: event._id,
+                                    workerId: user._id,
+                                })
+                            })
+                        })
+                    })
+                })
+                res.status(200).json({ event })
+            })
+            .catch(err => res.status(500).json({ err }))
+    })
 }
 
 exports.createMultiEvents = (req, res, next) => {
@@ -40,7 +70,7 @@ exports.createMultiEvents = (req, res, next) => {
 }
 
 exports.getAllEvents = (req, res, next) => {
-    Event.find().populate('venueId').populate({ path: 'workers.workerId' })
+    Event.find().populate('venueId').populate({ path: 'workers.workerId' }).lean()
         .then(events => res.status(200).json({ events }))
         .catch(err => res.status(500).json({ err }))
 }
