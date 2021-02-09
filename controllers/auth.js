@@ -37,6 +37,17 @@ exports.createUser = async(req, res, next) => {
     }
 }
 
+exports.resendPincode = async(req, res, next) => {
+    const { id } = req.params
+    const user = await User.findById(id)
+    user.pin = nodePin.generateRandPin(4)
+    User.create(user)
+        .then(async user => {
+            await sendEmail(user.email, user.name, user.password, user.pin)
+            res.status(200).json({ user })
+        })
+        .catch(err => res.status(500).json({ err }))
+}
 
 exports.login = (req, res, next) => {
     const { user } = req
