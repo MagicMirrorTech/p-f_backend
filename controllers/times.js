@@ -2,7 +2,7 @@ const Times = require('../models/Times')
 const User = require('../models/User')
 
 exports.getAllTimes = (req, res, next) => {
-    Times.find().populate({ path: 'workerId' })
+    Times.find().populate({ path: 'workerId' }).sort({timeIn: -1})
         .then(times => res.status(200).json({ times }))
         .catch(err => res.status(500).json({ err }))
 }
