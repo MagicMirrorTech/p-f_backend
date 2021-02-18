@@ -86,9 +86,9 @@ exports.getOneEvent = (req, res, next) => {
                 populate("workerId")
             users.forEach(user => {
                 event["users"].push(user.workerId)
-                event["venue"] = event.venueId
-                event["venueId"] = event.venueId._id
             })
+            event["venue"] = event.venueId
+            event["venueId"] = event.venueId._id
             res.status(200).json({ event })
         })
         .catch(err => res.status(500).json({ err }))

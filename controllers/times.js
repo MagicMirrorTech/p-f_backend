@@ -16,12 +16,17 @@ exports.createTimes = (req, res, next) => {
             await time.save()
             res.status(200).json({ time })
         }).catch(exception=>{
-            let time = new Times({workerId: user._id, date: date, timeIn: date})
-            Times.create(time)
-                .then(time => {
-                    res.status(200).json({ time })
-                })
-                .catch(err => res.status(500).json({ err }))
+            if(user){
+                let time = new Times({workerId: user._id, date: date, timeIn: date})
+                Times.create(time)
+                    .then(time => {
+                        res.status(200).json({ time })
+                    })
+                    .catch(err => res.status(500).json({ err }))
+            }else{
+                res.status(500).json({"error": "user not found"})
+            }
+
         })
     })
 }
