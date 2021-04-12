@@ -7,9 +7,9 @@ exports.sendEmail = (email, name, password, pinCode) => {
         from: 'plainfancyapp@gmail.com',
         subject: 'Welcome to Plain And Fancy',
         text: 'and easy to do anywhere, even with Node.js',
-        html: `<h1>Hello ${name} here is password ${password} and you pinCode is ${pinCode}</h1>
+        html: `<h1>Hello ${name} </h1>
       <p>
-      Test
+        Here is password ${password} and you pinCode is ${pinCode}
       </p>
       `,
     }
