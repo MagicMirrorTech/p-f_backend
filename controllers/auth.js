@@ -2,6 +2,7 @@ const User = require('../models/User')
 const { createToken, createTokenU } = require('../config/jwt')
 const { sendEmail } = require('../config/nodemailer')
 const nodePin = require('node-pin');
+const generator = require('generate-password');
 
 exports.signup = (req, res, next) => {
     User.register({...req.body }, req.body.password)
@@ -13,27 +14,34 @@ exports.signup = (req, res, next) => {
 }
 
 exports.createUser = async(req, res, next) => {
-    const { name, email, password } = req.body
+    const { email } = req.body
     const user = await User.findOne({ email })
-
     if (user === null) {
+        let password = generator.generate({
+            length: 10,
+            numbers: true
+        });
         let user = {...req.body}
+        user.password = password
         user.pin = nodePin.generateRandPin(4);
         User.create(user)
             .then(user => {
+                console.log(user)
                 const { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } = user
                 sendEmail(email, name, password, pin)
                     .then(info => {
                         res.status(200).json({ user: { role, email, events, teams, name, _id, address, contact, phone, mobile, payment, effective, timeIn, timeOut, pin, img } })
                     })
                     .catch(err => {
-
                         res.send(err)
                     })
             })
-            .catch(err => res.status(500).json({ err }))
-    } else if (user) {
-        res.status(500).json({ message: 'A teammate with the given email is already registered' })
+            .catch(err => {
+                console.log("error?", err)
+                res.status(500).json({ err })
+            })
+    } else {
+            res.status(500).json({ message: 'A teammate with the given email is already registered' })
     }
 }
 

@@ -14,9 +14,5 @@ exports.sendEmail = (email, name, password, pinCode) => {
       `,
     }
 
-    sgMail.send(msg).then(() => {
-        console.log('Email sent')
-    }).catch((error) => {
-        console.error(error)
-    })
+    return sgMail.send(msg)
 }
